@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disaster Prediction</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            background-color: #e74c3c;
+            color: white;
+            padding: 20px 0;
+            text-transform: uppercase;
+            font-size: 2.5em;
+            margin: 0;
+        }
+        .date-form {
+            margin: 20px;
+        }
+        .date-input {
+            padding: 10px;
+            font-size: 1.2em;
+            border: 2px solid #e74c3c;
+            border-radius: 5px;
+            background-color: #2c3e50;
+            color: #fff;
+            width: 200px;
+            text-align: center;
+        }
+        .submit-btn {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .submit-btn:hover {
+            background-color: #c0392b;
+        }
+        table {
+            width: 90%;
+            margin: 20px auto;
+            font-size: 1.2em;
+            border-collapse: collapse;
+            background-color: #34495e;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border: none;
+        }
+        th {
+            background-color: #e74c3c;
+            color: white;
+            text-transform: uppercase;
+        }
+        td {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+        tr:nth-child(even) td {
+            background-color: #3b556e;
+        }
+        tr:hover td {
+            background-color: #16a085;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Disaster Prediction</h1>
+    <div class="date-form">
+        <input type="number" id="yearInput" class="date-input" placeholder="Enter Year">
+        <button onclick="predictDisasters()" class="submit-btn">Predict</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>INDEX</th>
+                <th>YEAR</th>
+                <th>DISASTER NAME</th>
+                <th>PLACE</th>
+            </tr>
+        </thead>
+        <tbody id="disasterTable">
+        </tbody>
+    </table>
+
+    <script>
+        function predictDisasters() {
+            let year = document.getElementById("yearInput").value;
+            if (!year) {
+                alert("Please enter a valid year.");
+                return;
+            }
+            
+            const disasters = ["Flood", "Earthquake", "Tsunami", "Wildfire", "Hurricane", "Tornado", "Drought", "Landslide", "Volcano", "Blizzard"];
+            const places = ["Egypt","Las-vegas","South Africa","USA", "India", "Japan", "Indonesia", "Mexico", "Philippines", "China", "Turkey", "Brazil", "Russia"];
+            
+            let table = document.getElementById("disasterTable");
+            table.innerHTML = ""; // Clear previous data
+            
+            let n = Math.floor(Math.random() * 100); // Generate a random number less than 100
+            
+            for (let i = 0; i < n; i++) {
+                let randomDisaster = disasters[Math.floor(Math.random() * disasters.length)];
+                let randomPlace = places[Math.floor(Math.random() * places.length)];
+                let newRow = `<tr><td>${i + 1}</td><td>${year}</td><td>${randomDisaster}</td><td>${randomPlace}</td></tr>`;
+                table.innerHTML += newRow;
+            }
+        }
+    </script>
+</body>
+</html>
